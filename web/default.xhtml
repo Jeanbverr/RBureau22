@@ -15,6 +15,8 @@
                 <h:form >
                     <p:growl autoUpdate="true"/>
                     <p:tabMenu activeIndex="#{param.i}">
+                        
+                      
                         <p:menuitem value="Sneeuwvakanties">
                             <f:param name="i" value="0" />
                         </p:menuitem>
@@ -29,9 +31,17 @@
                         </p:menuitem>
                     </p:tabMenu>
                 </h:form>
+                <h:form>
+                    <p>IMAGES</p>
+                    
+                 
+                     <!-- test to access context parameters -->
+             
+                </h:form>
             </ui:define>
             <ui:define name="content">
                 <p>Here goes your view-specific content.</p>
+                <!-- test to access context parameters -->
             </ui:define>
         </ui:composition>
 

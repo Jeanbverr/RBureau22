@@ -12,6 +12,7 @@
         <f:view>
             <h:form>
                 <h1><h:outputText value="List"/></h1>
+                
                 <p:dataTable value="#{LoginController.findAll()}" var="item">
                     <p:column>
                         <f:facet name="header">
@@ -64,10 +65,6 @@
                 </p:dataTable>
             </h:form>
         </f:view>
-
-
-
-
     </h:body>
 </html>
 

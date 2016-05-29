@@ -4,13 +4,20 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    
-      <!-- Welcome page -->
-  <welcome-file-list>
-    <welcome-file>faces/default.xhtml</welcome-file>
-  </welcome-file-list>
-  
-  
+    <!-- Welcome page -->
+    <welcome-file-list>
+        <welcome-file>faces/default.xhtml</welcome-file>
+    </welcome-file-list>
+    <context-param>
+        <description>The relative path to travel images</description>
+        <param-name>travelsImagePath</param-name>
+        <param-value>/img/travels</param-value>
+    </context-param>
+    <context-param>
+        <description>The relative path to categories images</description>
+        <param-name>categoriesImagePath</param-name>
+        <param-value>/image/categories</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -20,23 +27,27 @@
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>servlet.SessionServlet</servlet-class>
     </servlet>
-    
-    
-   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.faces</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <resource-ref>
+        <description>Connects to database for RBureau application</description>
+        <res-ref-name>jdbc/RBureau</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
 </web-app>

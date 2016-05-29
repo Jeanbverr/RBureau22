@@ -6,12 +6,15 @@
 package controllers;
 
 import entities.Reis;
+import entities.Reiscategorie;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import model.ReisFacade;
+import model.ReiscategorieFacade;
+
 
 /**
  *
@@ -23,7 +26,7 @@ public class LoginController implements Serializable {
 
     @EJB
     private ReisFacade reisFacade;
-
+    private ReiscategorieFacade reiscategorieFacade;
    
     public LoginController() {
     }
@@ -31,6 +34,9 @@ public class LoginController implements Serializable {
     public List<Reis> findAll(){
         
         return reisFacade.findAll();
-    }
+    }    
     
+    public List<Reiscategorie> findAllReisCategories(){
+        return reiscategorieFacade.findAll();
+    }
 }
