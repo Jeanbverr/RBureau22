@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="common-style.css" library="css" />
+        <!--        <h:outputStylesheet library="css" name="style.css"  />-->
+    </h:head>
+    <h:body>       
+        <p:layout fullPage="true">
+           
+                <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;" resizable="false" closable="false" collapsible="false">
+          
+                    <h:outputText id ="outputtext" value="Welkom op Reisbureau. Neem snel een kijkje!" />
+                
+                </p:layoutUnit>
+           
+
+            <div id = "footer">
+            <p:layoutUnit position="south" header="Team Homo&trade;">        
+            </p:layoutUnit>
+            </div>
+            
+            <p:layoutUnit  position="west" size="200" header="Reiscategorien" resizable="false" closable="false" collapsible="true">
+                <div id="categorie" >
+                <ui:insert name="categorieReizen">Reizen Komen Hier</ui:insert>
+                </div>
+            </p:layoutUnit>
+
+        <!--    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
+                <h:outputText value="Right unit content." />
+            </p:layoutUnit>-->
+
+            <!--            Some center-pane. Can be overriden-->
+            <p:layoutUnit position="center">
+                <ui:insert name="content">Put default content here, if any.</ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+
