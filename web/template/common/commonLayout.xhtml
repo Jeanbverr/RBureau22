@@ -12,33 +12,32 @@
     </h:head>
     <h:body>       
         <p:layout fullPage="true">
-           
-                <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;" resizable="false" closable="false" collapsible="false">
-          
-                    <h:outputText id ="outputtext" value="Welkom op Reisbureau. Neem snel een kijkje!" />
-                
-                </p:layoutUnit>
-           
 
-            <div id = "footer">
-            <p:layoutUnit position="south" header="Team Homo&trade;">        
+            <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;" resizable="false" closable="false" collapsible="false">
+                <h:outputText id ="outputtext" value="Welkom op Reisbureau. Neem snel een kijkje!" />
             </p:layoutUnit>
-            </div>
+
+             <p:layoutUnit position="center">
+                <ui:insert name="reizen">Standard Text</ui:insert>
+            </p:layoutUnit>
             
-            <p:layoutUnit  position="west" size="200" header="Reiscategorien" resizable="false" closable="false" collapsible="true">
+            <div id = "footer">
+                <p:layoutUnit position="south" header="Team Homo&trade;">        
+                </p:layoutUnit>
+            </div>
+
+            <p:layoutUnit  position="west" size="200" header="Checkout" resizable="false" closable="false" collapsible="true">
                 <div id="categorie" >
-                <ui:insert name="categorieReizen">Reizen Komen Hier</ui:insert>
+                    <ui:insert name="Checkout">Reizen Komen Hier</ui:insert>
                 </div>
             </p:layoutUnit>
 
-        <!--    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
-                <h:outputText value="Right unit content." />
-            </p:layoutUnit>-->
+            <!--    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
+                    <h:outputText value="Right unit content." />
+                </p:layoutUnit>-->
 
             <!--            Some center-pane. Can be overriden-->
-            <p:layoutUnit position="center">
-                <ui:insert name="content">Put default content here, if any.</ui:insert>
-            </p:layoutUnit>
+           
         </p:layout>
     </h:body>
 </html>

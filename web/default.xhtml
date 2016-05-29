@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       >
@@ -10,21 +11,23 @@
 
         <ui:composition template="template/common/commonLayout.xhtml">
 
-            <ui:define name ="categorieReizen">
+            <ui:define name ="reizen">
                 <h:form >
                     <p:growl autoUpdate="true"/>
-                    <p:panelMenu id="categorie" style="width:190px">
-                        <p:submenu label="Strand">
-                        </p:submenu>
-                        <p:submenu label="Sneeuw">
-                            
-                        </p:submenu>
-                        <p:separator />
-                        <p:submenu label="Backpack" >
-                        
-
-                        </p:submenu>
-                    </p:panelMenu>
+                    <p:tabMenu activeIndex="#{param.i}">
+                        <p:menuitem value="Sneeuwvakanties">
+                            <f:param name="i" value="0" />
+                        </p:menuitem>
+                        <p:menuitem value="Strandvakanties">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                        <p:menuitem value="Backpack" >
+                            <f:param name="i" value="2" />
+                        </p:menuitem>
+                        <p:menuitem value="Citytrips" >
+                            <f:param name="i" value="3" />
+                        </p:menuitem>
+                    </p:tabMenu>
                 </h:form>
             </ui:define>
             <ui:define name="content">
