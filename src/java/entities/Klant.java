@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -37,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Klant.findAll", query = "SELECT k FROM Klant k"),
     @NamedQuery(name = "Klant.findById", query = "SELECT k FROM Klant k WHERE k.id = :id"),
     @NamedQuery(name = "Klant.findByNaam", query = "SELECT k FROM Klant k WHERE k.naam = :naam"),
-    @NamedQuery(name = "Klant.findByEMail", query = "SELECT k FROM Klant k WHERE k.eMail = :eMail"),
+    @NamedQuery(name = "Klant.findByEmail", query = "SELECT k FROM Klant k WHERE k.email = :email"),
     @NamedQuery(name = "Klant.findByPaswoord", query = "SELECT k FROM Klant k WHERE k.paswoord = :paswoord"),
     @NamedQuery(name = "Klant.findByTelefoonnr", query = "SELECT k FROM Klant k WHERE k.telefoonnr = :telefoonnr"),
     @NamedQuery(name = "Klant.findByAdres", query = "SELECT k FROM Klant k WHERE k.adres = :adres"),
@@ -56,12 +57,13 @@ public class Klant implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "naam")
     private String naam;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "e-mail")
-    private String eMail;
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -100,10 +102,10 @@ public class Klant implements Serializable {
         this.id = id;
     }
 
-    public Klant(Integer id, String naam, String eMail, String paswoord, long telefoonnr, String adres, String stad, long postcode) {
+    public Klant(Integer id, String naam, String email, String paswoord, long telefoonnr, String adres, String stad, long postcode) {
         this.id = id;
         this.naam = naam;
-        this.eMail = eMail;
+        this.email = email;
         this.paswoord = paswoord;
         this.telefoonnr = telefoonnr;
         this.adres = adres;
@@ -127,12 +129,12 @@ public class Klant implements Serializable {
         this.naam = naam;
     }
 
-    public String getEMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPaswoord() {

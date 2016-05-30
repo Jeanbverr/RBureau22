@@ -112,5 +112,4 @@ public class Reiscategorie implements Serializable {
         return "entities.Reiscategorie[ id=" + id + " ]";
     }
     
-    
 }

@@ -8,6 +8,7 @@ package model;
 import entities.Klant;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -23,10 +24,22 @@ public class KlantFacade extends AbstractFacade<Klant> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }    
+    
+    public Klant findByEmail(String email){
+        Klant klant = null;
+        try{
+            klant = (Klant) em.createNamedQuery("Klant.findByEmail").setParameter("email",email).getSingleResult();
+        }catch(NoResultException ex ){
+            ex.getMessage();
+        }
+        
+        return klant;
     }
 
     public KlantFacade() {
         super(Klant.class);
+        
     }
     
 }

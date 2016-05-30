@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:link value ="Back to log in" outcome ="/login"></h:link>
+        <f:view>
+
+            <p:panel header="Reisbureau Registratie" style="width: 500px; margin:auto;">
+                <h:form >
+                     <p:messages /> 
+                    <p:panelGrid columns="2" style = "width: 100%;">                    
+                        <p:outputLabel value="Naam:" for="naam" />
+                        <p:inputText id="naam" value="#{LoginController.klant.naam}" title="Naam" required="true" requiredMessage="The Naam field is required."/>
+                        <p:outputLabel value="Email:" for="email" />
+                        <p:inputText id="email" value="#{LoginController.klant.email}" title="Email" required="true" requiredMessage="The Email field is required." validatorMessage="Wrong email format">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+                        <p:outputLabel value="Paswoord:" for="paswoord" />
+                        <p:password id="paswoord" value="#{LoginController.klant.paswoord}" title="Paswoord" required="true" requiredMessage="The Paswoord field is required."/>
+                        <p:outputLabel value="Telefoonnr:" for="telefoonnr" />
+                        <p:inputText id="telefoonnr" value="#{LoginController.klant.telefoonnr}" title="Telefoonnr" required="true" requiredMessage="The Telefoonnr field is required."/>
+                        <p:outputLabel value="Adres:" for="adres" />
+                        <p:inputText id="adres" value="#{LoginController.klant.adres}" title="Adres" required="true" requiredMessage="The Adres field is required."/>
+                        <p:outputLabel value="Stad:" for="stad" />
+                        <p:inputText id="stad" value="#{LoginController.klant.stad}" title="Stad" required="true" requiredMessage="The Stad field is required."/>
+                        <p:outputLabel value="Postcode:" for="postcode" />
+                        <p:inputText id="postcode" value="#{LoginController.klant.postcode}" title="Postcode" required="true" requiredMessage="The Postcode field is required."/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Registreer" actionListener="#{LoginController.add()}" ajax="false" style = "width: 100%; margin-top: 15px;"></p:commandButton>
+                   
+                </h:form>
+            </p:panel>
+        </f:view>
+
+    </h:body>
+</html>
+
