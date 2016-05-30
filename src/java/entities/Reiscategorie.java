@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author michael
  */
-@Entity
+    @Entity
 @Table(name = "reiscategorie")
 @XmlRootElement
 @NamedQueries({

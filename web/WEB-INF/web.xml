@@ -11,12 +11,12 @@
     <context-param>
         <description>The relative path to travel images</description>
         <param-name>travelsImagePath</param-name>
-        <param-value>/img/travels</param-value>
+        <param-value>/img/travels/</param-value>
     </context-param>
     <context-param>
         <description>The relative path to categories images</description>
         <param-name>categoriesImagePath</param-name>
-        <param-value>/image/categories</param-value>
+        <param-value>/img/categories/</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
