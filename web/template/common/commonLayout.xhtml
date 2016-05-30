@@ -12,12 +12,39 @@
     </h:head>
     <h:body>       
         <p:layout fullPage="true">
-
-            <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;" resizable="false" closable="false" collapsible="false">
-                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />
+            <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;">
+                <h:form>
+<!--                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />-->
+                <p:menubar>
+                    <p:menuitem value="Logout" action="#{LoginController.logout()}" icon="ui-icon-logout" />
+                     <p:menuitem value="Shopping-cart" action="#{LoginController.logout()}"  />
+                       
+                      
+                </p:menubar>
+                </h:form>
             </p:layoutUnit>
 
              <p:layoutUnit position="center">
+                 
+                  <h:form >
+                    <p:growl autoUpdate="true"/>
+                      <p:tabMenu activeIndex="#{param.i}">                        
+                      
+                          <p:menuitem value="Sneeuwvakanties" outcome="/default">
+                            <f:param name="i" value="0" />
+                        </p:menuitem>
+                        <p:menuitem value="Strandvakanties" outcome="/strand">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                        <p:menuitem value="Backpack" outcome="/backpack">
+                            <f:param name="i" value="2" />
+                        </p:menuitem>
+                        <p:menuitem value="Citytrips" outcome="/citytrip">
+                            <f:param name="i" value="3" />
+                        </p:menuitem>
+                      </p:tabMenu>
+                  </h:form>          
+                   
                 <ui:insert name="reizen">Standard Text</ui:insert>
             </p:layoutUnit>
             
@@ -28,6 +55,8 @@
 
             <p:layoutUnit  position="west" size="200" header="Checkout" resizable="false" closable="false" collapsible="true">
                 <div id="categorie" >
+                    <p>Welkom #{LoginController.name} !!!</p>
+                   
                     <ui:insert name="Checkout">Reizen Komen Hier</ui:insert>
                 </div>
             </p:layoutUnit>

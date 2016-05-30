@@ -5,7 +5,9 @@
  */
 package model;
 
+import entities.Reis;
 import entities.Reiscategorie;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,13 @@ public class ReiscategorieFacade extends AbstractFacade<Reiscategorie> {
 
     public ReiscategorieFacade() {
         super(Reiscategorie.class);
+    }
+    
+    public List<Reis> getReizenByCategory(String category){
+        Reiscategorie cat = (Reiscategorie) em.createNamedQuery("Reiscategorie.findByNaam").setParameter("naam", category).getSingleResult();
+        System.out.println(cat.getReisList());
+        return cat.getReisList();       
+    
     }
     
 }

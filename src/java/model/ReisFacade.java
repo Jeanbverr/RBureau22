@@ -6,8 +6,10 @@
 package model;
 
 import entities.Reis;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -29,4 +31,8 @@ public class ReisFacade extends AbstractFacade<Reis> {
         super(Reis.class);
     }
     
+  
+    
+    
+  
 }
