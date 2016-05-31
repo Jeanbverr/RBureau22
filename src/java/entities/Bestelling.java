@@ -8,11 +8,14 @@ package entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -55,6 +59,11 @@ public class Bestelling implements Serializable {
     @NotNull
     @Column(name = "confirmatienummer")
     private int confirmatienummer;
+    @JoinTable(name = "bestelde_reis", joinColumns = {
+        @JoinColumn(name = "bestelling_id", referencedColumnName = "id"),
+        @JoinColumn(name = "reis_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Reis> reisList;
     @JoinColumn(name = "klant_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Klant klant;
@@ -107,6 +116,15 @@ public class Bestelling implements Serializable {
 
     public void setConfirmatienummer(int confirmatienummer) {
         this.confirmatienummer = confirmatienummer;
+    }
+
+    @XmlTransient
+    public List<Reis> getReisList() {
+        return reisList;
+    }
+
+    public void setReisList(List<Reis> reisList) {
+        this.reisList = reisList;
     }
 
     public Klant getKlant() {

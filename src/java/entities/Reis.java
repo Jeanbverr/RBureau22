@@ -80,7 +80,7 @@ public class Reis implements Serializable {
     @Column(name = "terugdatum")
     private String terugdatum;
     @ManyToMany(mappedBy = "reisList")
-    private List<Klant> klantList;
+    private List<Bestelling> bestellingList;
     @JoinColumn(name = "reiscategorie_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Reiscategorie reiscategorieId;
@@ -159,12 +159,12 @@ public class Reis implements Serializable {
     }
 
     @XmlTransient
-    public List<Klant> getKlantList() {
-        return klantList;
+    public List<Bestelling> getBestellingList() {
+        return bestellingList;
     }
 
-    public void setKlantList(List<Klant> klantList) {
-        this.klantList = klantList;
+    public void setBestellingList(List<Bestelling> bestellingList) {
+        this.bestellingList = bestellingList;
     }
 
     public Reiscategorie getReiscategorieId() {
