@@ -36,3 +36,10 @@ and open the template in the editor.
          text-align: center;
          margin-bottom: 0px;
 }
+
+.header_shadow{
+    
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
+-moz-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
+box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
+}
