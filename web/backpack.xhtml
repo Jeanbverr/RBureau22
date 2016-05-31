@@ -15,8 +15,6 @@
             <ui:define name ="reizen">
                
                 <f:view>
-
-
                     <h:form>
                         <h1><h:outputText value="List"/></h1>
                         <p:dataTable value="#{reisController.getReizenByCategorie('backpacktrip')}" var="item">
@@ -24,14 +22,15 @@
                                 <f:facet name="img">
                                     <h:outputText value="img"/>
                                 </f:facet>
-                                <p:graphicImage value="/img/categories/projectJava.jpg" width="170px"/>  
+                                <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/>  
                             </p:column>
                         
-                            <p:column>
+                            <p:column> 
                                 <f:facet name="header">
                                     <h:outputText value="Locatie"/>
                                 </f:facet>
                                 <h:outputText value="#{item.locatie}"/>
+                                <h:outputText value="${initParam.categoriesImagePath}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">

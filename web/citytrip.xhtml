@@ -9,14 +9,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        	<ui:composition template="/template/common/commonLayout.xhtml">
-    	
-    		
+        	<ui:composition template="/template/common/commonLayout.xhtml"> 		
             <ui:define name ="reizen">
                
                 <f:view>
-
-
                     <h:form>
                         <h1><h:outputText value="List"/></h1>
                         <p:dataTable value="#{reisController.getReizenByCategorie('citytrip')}" var="item">
@@ -24,7 +20,7 @@
                                 <f:facet name="img">
                                     <h:outputText value="img"/>
                                 </f:facet>
-                                <p:graphicImage value="/img/categories/projectJava.jpg" width="170px"/>  
+                                <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
                             </p:column>
                            
                             <p:column>

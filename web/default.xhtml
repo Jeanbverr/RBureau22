@@ -23,10 +23,10 @@
 
                         <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
                              <p:column>
-                                <f:facet name="img">
+                                  <f:facet name="img">
                                     <h:outputText value="img"/>
                                 </f:facet>
-                                <p:graphicImage value="/img/categories/projectJava.jpg" width="170px"/>  
+                                 <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
                             </p:column>
 
 

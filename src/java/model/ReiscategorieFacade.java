@@ -33,6 +33,8 @@ public class ReiscategorieFacade extends AbstractFacade<Reiscategorie> {
     
     public List<Reis> getReizenByCategory(String category){
         Reiscategorie cat = (Reiscategorie) em.createNamedQuery("Reiscategorie.findByNaam").setParameter("naam", category).getSingleResult();
+        System.out.println(cat);
+     
         System.out.println(cat.getReisList());
         return cat.getReisList();       
     
