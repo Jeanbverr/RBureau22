@@ -14,69 +14,238 @@
 
             <ui:define name ="reizen">
 
+                <p:tabView effect="slide">
+                    <p:tab title="Sneeuwvakanties">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText value="List"/></h1>
 
-                <f:view>
-
-
-                    <h:form>
-                        <h1><h:outputText value="List"/></h1>
-
-                        <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
-                             <p:column>
-                                  <f:facet name="img">
-                                    <h:outputText value="img"/>
-                                </f:facet>
-                                 <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
-                            </p:column>
-
-
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Locatie"/>
-                                </f:facet>
-                                <h:outputText value="#{item.locatie}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Land"/>
-                                </f:facet>
-                                <h:outputText value="#{item.land}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Prijs"/>
-                                </f:facet>
-                                <h:outputText value="#{item.prijs}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Beschrijving"/>
-                                </f:facet>
-                                <h:outputText value="#{item.beschrijving}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Vertrekdatum"/>
-                                </f:facet>
-                                <h:outputText value="#{item.vertrekdatum}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Terugdatum"/>
-                                </f:facet>
-                                <h:outputText value="#{item.terugdatum}"/>
-                            </p:column>
-                              <p:column>
-                                  <p:commandButton value="add to cart"></p:commandButton>
-                            </p:column>
-
-                        </p:dataTable>
-                    </h:form>
-                </f:view>
-
-                
+                                <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
+                                    <p:column>
+                                        <f:facet name="img">
+                                            <h:outputText value="img"/>
+                                        </f:facet>
+                                        <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
+                                    </p:column>
 
 
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Locatie"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.locatie}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Land"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.land}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prijs"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prijs}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Beschrijving"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.beschrijving}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vertrekdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vertrekdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Terugdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.terugdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="add to cart"></p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+
+                    </p:tab>
+                    <p:tab title="Strandvakanties">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{reisController.getReizenByCategorie('strand')}" var="item">
+                                    <p:column>
+                                        <f:facet name="img">
+                                            <h:outputText value="img"/>
+                                        </f:facet>
+                                        <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Locatie"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.locatie}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Land"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.land}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prijs"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prijs}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Beschrijving"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.beschrijving}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vertrekdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vertrekdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Terugdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.terugdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="add to cart"></p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </p:tab>
+                    <p:tab title="Backpacktrips">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{reisController.getReizenByCategorie('backpacktrip')}" var="item">
+                                    <p:column>
+                                        <f:facet name="img">
+                                            <h:outputText value="img"/>
+                                        </f:facet>
+                                        <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/>  
+                                    </p:column>
+
+                                    <p:column> 
+                                        <f:facet name="header">
+                                            <h:outputText value="Locatie"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.locatie}"/>
+                                        <h:outputText value="${initParam.categoriesImagePath}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Land"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.land}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prijs"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prijs}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Beschrijving"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.beschrijving}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vertrekdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vertrekdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Terugdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.terugdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="add to cart"></p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+                    </p:tab>
+                    <p:tab title="Citytrips">
+                        <f:view>
+                            <h:form>
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{reisController.getReizenByCategorie('citytrip')}" var="item">
+                                    <p:column>
+                                        <f:facet name="img">
+                                            <h:outputText value="img"/>
+                                        </f:facet>
+                                        <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Locatie"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.locatie}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Land"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.land}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prijs"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prijs}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Beschrijving"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.beschrijving}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vertrekdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vertrekdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Terugdatum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.terugdatum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="add to cart"></p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+
+
+                    </p:tab>
+                </p:tabView>
             </ui:define>
 
         </ui:composition>
