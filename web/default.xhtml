@@ -19,7 +19,8 @@
                         <f:view>
                             <h:form>
                                 <h1><h:outputText value="List"/></h1>
-
+                               
+                                  <h:commandLink value = "add to cart" action="#{ShoppingCart.addItem()}"></h:commandLink>
                                 <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
                                     <p:column>
                                         <f:facet name="img">
@@ -27,7 +28,7 @@
                                         </f:facet>
                                         <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
                                     </p:column>
-
+                                    
 
                                     <p:column>
                                         <f:facet name="header">
@@ -66,7 +67,9 @@
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
                                     <p:column>
-                                        <p:commandButton value="add to cart"></p:commandButton>
+                                        <p:commandButton action="#{ShoppingCart.addItem(item)}" ajax="true" value="add to cart" update=":header_menu_form:number_of_items :checkout_form:personen_per_reis">
+                                           
+                                        </p:commandButton>
                                     </p:column>
 
                                 </p:dataTable>
@@ -123,7 +126,7 @@
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
                                     <p:column>
-                                        <p:commandButton value="add to cart"></p:commandButton>
+                                        <p:commandButton action="#{ShoppingCart.addItem(item)}" ajax="true" value="add to cart" update=":header_menu_form:number_of_items :checkout_form:personen_per_reis"></p:commandButton>
                                     </p:column>
 
                                 </p:dataTable>
@@ -180,7 +183,7 @@
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
                                     <p:column>
-                                        <p:commandButton value="add to cart"></p:commandButton>
+                                        <p:commandButton action="#{ShoppingCart.addItem(item)}" ajax="true" value="add to cart" update=":header_menu_form:number_of_items :checkout_form:personen_per_reis"></p:commandButton>
                                     </p:column>
 
                                 </p:dataTable>
@@ -236,7 +239,7 @@
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
                                     <p:column>
-                                        <p:commandButton value="add to cart"></p:commandButton>
+                                        <p:commandButton action="#{ShoppingCart.addItem(item)}" ajax="true" value="add to cart" update=":header_menu_form:number_of_items :checkout_form:personen_per_reis"></p:commandButton>
                                     </p:column>
 
                                 </p:dataTable>

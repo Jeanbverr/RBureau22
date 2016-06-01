@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import model.ReisFacade;
@@ -22,7 +23,7 @@ import model.ReiscategorieFacade;
  * @author michael
  */
 @Named(value = "reisController")
-@SessionScoped
+@RequestScoped
 public class ReisController implements Serializable {
 
     @EJB

@@ -52,7 +52,7 @@ public class LoginController implements Serializable {
     
     
     public String loginValidation(){
-        Klant klant;  
+        
             
         klant = klantFacade.findByEmail(email);
         

@@ -15,17 +15,23 @@
             <!--            <p:layoutUnit id="header" position="north" size="150" header="Reisbureau&trade;">              
                         </p:layoutUnit>-->
             <p:layoutUnit position="north"  style="border:none" size="80">
-                          <h:form><!--                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />-->
-                    <p:menubar styleClass="header_shadow" >
+                          <h:form id="header_menu_form"><!--                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />-->
+                   
+                <p:menubar styleClass="header_shadow" >
                         <p:menuitem value="Reisbureau&trade;" style="font-size: 20px; font-weight: bold"/>
                         <p:menuitem value="      "   />
-                        <p:menuitem value="Shopping-cart"  icon="ui-icon-cart"  />
-                        <f:facet name="options">                           
-                            <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
-                        </f:facet>
 
+                        
+                        
+                        <f:facet name="options">  
+                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCart.reisListsize}" icon="ui-icon-cart"/>
+                            <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
+                             
+                        </f:facet>
+                         
 
                     </p:menubar>
+                    
                 </h:form>
             </p:layoutUnit>
 
@@ -40,11 +46,15 @@
             </div>
 
             <p:layoutUnit  position="west" size="200" header="Checkout" resizable="false" closable="false" collapsible="true">
+                <h:form id="checkout_form">
                 <div id="categorie" >
                     <p>Welkom #{LoginController.name} !!!</p>
-
-                    <ui:insert name="Checkout">Reizen Komen Hier</ui:insert>
+                    <ui:insert name="Checkout">Reizen Komen Hier</ui:insert><br></br>
+                    
+                        <h:outputText id="personen_per_reis" value = "#{ShoppingCart.getpersonenperReis()}" />
+                     
                 </div>
+               </h:form>
             </p:layoutUnit>
 
             <!--    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
