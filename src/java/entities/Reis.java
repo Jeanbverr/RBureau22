@@ -6,7 +6,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -60,11 +59,10 @@ public class Reis implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "land")
     private String land;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "prijs")
-    private BigDecimal prijs;
+    private float prijs;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -93,7 +91,7 @@ public class Reis implements Serializable {
         this.id = id;
     }
 
-    public Reis(Integer id, String locatie, String land, BigDecimal prijs, String beschrijving, String vertrekdatum, String terugdatum) {
+    public Reis(Integer id, String locatie, String land, float prijs, String beschrijving, String vertrekdatum, String terugdatum) {
         this.id = id;
         this.locatie = locatie;
         this.land = land;
@@ -127,11 +125,11 @@ public class Reis implements Serializable {
         this.land = land;
     }
 
-    public BigDecimal getPrijs() {
+    public float getPrijs() {
         return prijs;
     }
 
-    public void setPrijs(BigDecimal prijs) {
+    public void setPrijs(float prijs) {
         this.prijs = prijs;
     }
 

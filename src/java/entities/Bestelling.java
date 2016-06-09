@@ -6,7 +6,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -49,11 +48,10 @@ public class Bestelling implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "totaal")
-    private BigDecimal totaal;
+    private float totaal;
     @Basic(optional = false)
     @NotNull
     @Column(name = "datumcreatie")
@@ -76,7 +74,7 @@ public class Bestelling implements Serializable {
         this.id = id;
     }
 
-    public Bestelling(Integer id, BigDecimal totaal, Date datumcreatie, int confirmatienummer) {
+    public Bestelling(Integer id, float totaal, Date datumcreatie, int confirmatienummer) {
         this.id = id;
         this.totaal = totaal;
         this.datumcreatie = datumcreatie;
@@ -91,11 +89,11 @@ public class Bestelling implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getTotaal() {
+    public float getTotaal() {
         return totaal;
     }
 
-    public void setTotaal(BigDecimal totaal) {
+    public void setTotaal(float totaal) {
         this.totaal = totaal;
     }
 
