@@ -82,7 +82,7 @@ public class Klant implements Serializable {
     @NotNull
     @Column(name = "postcode")
     private long postcode;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "klant")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "klantId")
     private List<Bestelling> bestellingList;
 
     public Klant() {

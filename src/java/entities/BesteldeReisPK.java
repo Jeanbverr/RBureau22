@@ -16,59 +16,60 @@ import javax.validation.constraints.NotNull;
  * @author michael
  */
 @Embeddable
-public class BestellingPK implements Serializable {
+public class BesteldeReisPK implements Serializable {
 
-    @Basic(optional = false)
-    @Column(name = "id")
-    private int id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "klant_id")
-    private int klantId;
+    @Column(name = "bestelling_id")
+    private int bestellingId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "reis_id")
+    private int reisId;
 
-    public BestellingPK() {
+    public BesteldeReisPK() {
     }
 
-    public BestellingPK(int id, int klantId) {
-        this.id = id;
-        this.klantId = klantId;
+    public BesteldeReisPK(int bestellingId, int reisId) {
+        this.bestellingId = bestellingId;
+        this.reisId = reisId;
     }
 
-    public int getId() {
-        return id;
+    public int getBestellingId() {
+        return bestellingId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBestellingId(int bestellingId) {
+        this.bestellingId = bestellingId;
     }
 
-    public int getKlantId() {
-        return klantId;
+    public int getReisId() {
+        return reisId;
     }
 
-    public void setKlantId(int klantId) {
-        this.klantId = klantId;
+    public void setReisId(int reisId) {
+        this.reisId = reisId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
-        hash += (int) klantId;
+        hash += (int) bestellingId;
+        hash += (int) reisId;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BestellingPK)) {
+        if (!(object instanceof BesteldeReisPK)) {
             return false;
         }
-        BestellingPK other = (BestellingPK) object;
-        if (this.id != other.id) {
+        BesteldeReisPK other = (BesteldeReisPK) object;
+        if (this.bestellingId != other.bestellingId) {
             return false;
         }
-        if (this.klantId != other.klantId) {
+        if (this.reisId != other.reisId) {
             return false;
         }
         return true;
@@ -76,7 +77,7 @@ public class BestellingPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.BestellingPK[ id=" + id + ", klantId=" + klantId + " ]";
+        return "entities.BesteldeReisPK[ bestellingId=" + bestellingId + ", reisId=" + reisId + " ]";
     }
     
 }

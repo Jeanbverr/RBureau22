@@ -10,15 +10,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,16 +37,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Bestelling.findAll", query = "SELECT b FROM Bestelling b"),
-    @NamedQuery(name = "Bestelling.findById", query = "SELECT b FROM Bestelling b WHERE b.bestellingPK.id = :id"),
+    @NamedQuery(name = "Bestelling.findById", query = "SELECT b FROM Bestelling b WHERE b.id = :id"),
     @NamedQuery(name = "Bestelling.findByTotaal", query = "SELECT b FROM Bestelling b WHERE b.totaal = :totaal"),
     @NamedQuery(name = "Bestelling.findByDatumcreatie", query = "SELECT b FROM Bestelling b WHERE b.datumcreatie = :datumcreatie"),
-    @NamedQuery(name = "Bestelling.findByConfirmatienummer", query = "SELECT b FROM Bestelling b WHERE b.confirmatienummer = :confirmatienummer"),
-    @NamedQuery(name = "Bestelling.findByKlantId", query = "SELECT b FROM Bestelling b WHERE b.bestellingPK.klantId = :klantId")})
+    @NamedQuery(name = "Bestelling.findByConfirmatienummer", query = "SELECT b FROM Bestelling b WHERE b.confirmatienummer = :confirmatienummer")})
 public class Bestelling implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected BestellingPK bestellingPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -59,39 +63,32 @@ public class Bestelling implements Serializable {
     @NotNull
     @Column(name = "confirmatienummer")
     private int confirmatienummer;
-    @JoinTable(name = "bestelde_reis", joinColumns = {
-        @JoinColumn(name = "bestelling_id", referencedColumnName = "id"),
-        @JoinColumn(name = "reis_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<Reis> reisList;
-    @JoinColumn(name = "klant_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "klant_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Klant klant;
+    private Klant klantId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bestelling")
+    private List<BesteldeReis> besteldeReisList;
 
     public Bestelling() {
     }
 
-    public Bestelling(BestellingPK bestellingPK) {
-        this.bestellingPK = bestellingPK;
+    public Bestelling(Integer id) {
+        this.id = id;
     }
 
-    public Bestelling(BestellingPK bestellingPK, BigDecimal totaal, Date datumcreatie, int confirmatienummer) {
-        this.bestellingPK = bestellingPK;
+    public Bestelling(Integer id, BigDecimal totaal, Date datumcreatie, int confirmatienummer) {
+        this.id = id;
         this.totaal = totaal;
         this.datumcreatie = datumcreatie;
         this.confirmatienummer = confirmatienummer;
     }
 
-    public Bestelling(int id, int klantId) {
-        this.bestellingPK = new BestellingPK(id, klantId);
+    public Integer getId() {
+        return id;
     }
 
-    public BestellingPK getBestellingPK() {
-        return bestellingPK;
-    }
-
-    public void setBestellingPK(BestellingPK bestellingPK) {
-        this.bestellingPK = bestellingPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public BigDecimal getTotaal() {
@@ -118,27 +115,27 @@ public class Bestelling implements Serializable {
         this.confirmatienummer = confirmatienummer;
     }
 
+    public Klant getKlantId() {
+        return klantId;
+    }
+
+    public void setKlantId(Klant klantId) {
+        this.klantId = klantId;
+    }
+
     @XmlTransient
-    public List<Reis> getReisList() {
-        return reisList;
+    public List<BesteldeReis> getBesteldeReisList() {
+        return besteldeReisList;
     }
 
-    public void setReisList(List<Reis> reisList) {
-        this.reisList = reisList;
-    }
-
-    public Klant getKlant() {
-        return klant;
-    }
-
-    public void setKlant(Klant klant) {
-        this.klant = klant;
+    public void setBesteldeReisList(List<BesteldeReis> besteldeReisList) {
+        this.besteldeReisList = besteldeReisList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bestellingPK != null ? bestellingPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -149,7 +146,7 @@ public class Bestelling implements Serializable {
             return false;
         }
         Bestelling other = (Bestelling) object;
-        if ((this.bestellingPK == null && other.bestellingPK != null) || (this.bestellingPK != null && !this.bestellingPK.equals(other.bestellingPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -157,7 +154,7 @@ public class Bestelling implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Bestelling[ bestellingPK=" + bestellingPK + " ]";
+        return "entities.Bestelling[ id=" + id + " ]";
     }
     
 }
