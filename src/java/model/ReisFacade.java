@@ -6,6 +6,7 @@
 package model;
 
 import entities.Reis;
+import entities.Reiscategorie;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,6 +22,7 @@ public class ReisFacade extends AbstractFacade<Reis> {
 
     @PersistenceContext(unitName = "KutprojectPU")
     private EntityManager em;
+    
 
     @Override
     protected EntityManager getEntityManager() {
@@ -29,9 +31,22 @@ public class ReisFacade extends AbstractFacade<Reis> {
 
     public ReisFacade() {
         super(Reis.class);
-    }
+    }   
     
-  
+     public List<Reis> getReisList(){
+         
+        Reiscategorie cat = null;
+       // System.out.println("Reizen: " + cat.getReisList());
+         return cat.getReisList();
+
+      //  Reiscategorie cat = (Reiscategorie) em.createNamedQuery("Reiscategorie.findByNaam").setParameter("naam", category).getSingleResult();
+       
+        //return cat.getReisList();  
+      }
+    //    Reiscategorie category;
+       
+     
+       // System.out.println(cat.getReisList());
     
     
   

@@ -165,6 +165,7 @@ public class Reis implements Serializable {
         this.reiscategorieId = reiscategorieId;
     }
 
+    
     @XmlTransient
     public List<BesteldeReis> getBesteldeReisList() {
         return besteldeReisList;
