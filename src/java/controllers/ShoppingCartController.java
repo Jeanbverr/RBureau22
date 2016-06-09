@@ -25,9 +25,9 @@ import javax.inject.Named;
  *
  * @author michael
  */
-@Named(value = "ShoppingCart")
+@Named(value = "ShoppingCartController")
 @SessionScoped
-public class ShoppingCart implements Serializable {
+public class ShoppingCartController implements Serializable {
 
     @EJB
     private model.ShoppingCart shoppingCart;
