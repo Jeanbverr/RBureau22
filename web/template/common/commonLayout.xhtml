@@ -24,7 +24,7 @@
                         
                         
                         <f:facet name="options">  
-                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCart.reisListsize}" icon="ui-icon-cart"/>
+                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>
                             <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
                              
                         </f:facet>
@@ -51,7 +51,7 @@
                     <p>Welkom #{LoginController.name} !!!</p>
                     <ui:insert name="Checkout">Reizen Komen Hier</ui:insert><br></br>
                     
-                        <h:outputText id="personen_per_reis" value = "#{ShoppingCart.getpersonenperReis()}" />
+                        <h:outputText id="personen_per_reis" value = "#{ShoppingCartController.getpersonenperReis()}"/>
                      
                 </div>
                </h:form>
