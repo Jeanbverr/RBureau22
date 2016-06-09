@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -28,50 +29,25 @@ import javax.inject.Named;
 @SessionScoped
 public class ShoppingCart implements Serializable {
 
-    //Implementie in stateful session bean steken
-    //List van reizen
-    private List<Reis> rList = new ArrayList<Reis>();
-    private List<String> locationNames = new ArrayList<String>();    
-    private Set<String> uniqueLocationNames;
-    private Bestelling bestelling = new Bestelling();
+    @EJB
+    private model.ShoppingCart shoppingCart;
 
-    public void addItem(Reis item) {        
-        
-        rList.add(item);
-        locationNames.add(item.getLocatie());
-        
-        rList.stream().forEach((reis) -> {            
-            System.out.println(reis.getLocatie());
+    
 
-        });
-        System.out.println("There are " + rList.size() + " reizen in your shopping cart");
+    public void addItem(Reis item) {      
         
+        shoppingCart.addItem(item);
 
     }
 
     public String getReisListsize() {
 
-        String size;
-        if (rList.isEmpty()) {
-            size = "";
-        } else {
-            size = Integer.toString(rList.size());
-
-        }
-
-        return size;
+        return shoppingCart.getReisListsize();
     }
     
     public String getpersonenperReis(){
     
-        String kutstring="";
-        uniqueLocationNames = new HashSet<>(locationNames);
-        for(String key: uniqueLocationNames) {
-            
-            kutstring += "Voor "+Collections.frequency(locationNames, key)+" p naar " + key.toString() + ", ";
-        }
-        System.out.println(uniqueLocationNames);
-        return kutstring;
+      return shoppingCart.getpersonenperReis();
     
     }
 
