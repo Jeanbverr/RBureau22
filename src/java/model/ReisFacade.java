@@ -43,11 +43,6 @@ public class ReisFacade extends AbstractFacade<Reis> {
        
         //return cat.getReisList();  
       }
-    //    Reiscategorie category;
-       
-     
-       // System.out.println(cat.getReisList());
-    
     
   
 }
