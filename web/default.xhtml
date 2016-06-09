@@ -20,7 +20,7 @@
                             <h:form>
                                 <h1><h:outputText value="List"/></h1>
                                
-                                  <h:commandLink value = "add to cart" action="#{ShoppingCartController.addItem()}"></h:commandLink>
+                                <h:commandLink value = "add to cart" action="#{ShoppingCartController.addItem(item)}"></h:commandLink>
                                 <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
                                     <p:column>
                                         <f:facet name="img">
