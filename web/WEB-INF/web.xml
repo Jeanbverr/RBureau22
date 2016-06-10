@@ -34,8 +34,15 @@
     </servlet>
     <servlet>
         <servlet-name>SessionServlet</servlet-name>
-        <servlet-class>servlet.SessionServlet</servlet-class>
+        <servlet-class>servlet.SessionServlet</servlet-class>       
     </servlet>
+    <servlet-mapping>
+         <servlet-name>SessionServlet</servlet-name>
+         <url-pattern>/SessionServlet</url-pattern>
+    </servlet-mapping>
+    <listener>
+        <listener-class>controllers.SessionManagerBean</listener-class>
+    </listener>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>

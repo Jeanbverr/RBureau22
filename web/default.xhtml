@@ -18,7 +18,7 @@
                     <p:tab title="Sneeuwvakanties">
                         <f:view>
                             <h:form>
-                                <h1><h:outputText value="List"/></h1>
+                                <h1><h:outputText value="List"/>   #{SessionManagerBean.totalActiveSessions}  </h1>
                                
                                 <h:commandLink value = "add to cart" action="#{ShoppingCartController.addItem(item)}"></h:commandLink>
                                 <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
@@ -29,7 +29,6 @@
                                         <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
                                     </p:column>
                                     
-
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Locatie"/>
