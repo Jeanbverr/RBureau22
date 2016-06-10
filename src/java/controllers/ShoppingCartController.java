@@ -8,6 +8,7 @@ package controllers;
 import entities.Bestelling;
 import entities.Klant;
 import entities.Reis;
+import interceptor.LoggerM;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public class ShoppingCartController implements Serializable {
     private model.ShoppingCart shoppingCart;
 
     
-
+    @LoggerM
     public void addItem(Reis item) {      
         
         shoppingCart.addItem(item);
