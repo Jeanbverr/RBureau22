@@ -5,13 +5,11 @@
  */
 package model;
 
+import cart.ReisItem;
 import entities.Bestelling;
 import entities.Reis;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.ejb.Stateful;
 
 /**
@@ -21,18 +19,30 @@ import javax.ejb.Stateful;
 @Stateful
 public class ShoppingCart {
 
-    private List<Reis> rList = new ArrayList<Reis>();
-    private List<String> locationNames = new ArrayList<String>();
-    private Set<String> uniqueLocationNames;
+    private List<ReisItem> rList = new ArrayList<ReisItem>();  
     private Bestelling bestelling = new Bestelling();
 
     public void addItem(Reis item) {
 
-        rList.add(item);
-        locationNames.add(item.getLocatie());
+        ReisItem currentReisitem = null;
+        for (ReisItem reisI : rList) {
 
-        rList.stream().forEach((reis) -> {
-            System.out.println(reis.getLocatie());
+            if (reisI.getReis().getLocatie().equals(item.getLocatie())) {
+                currentReisitem = reisI;
+            }
+        }
+
+        if (currentReisitem == null) {
+            ReisItem reisItem = new ReisItem(item);
+            rList.add(reisItem);
+
+        } else {
+
+            currentReisitem.incrementAantal();
+
+        }
+        rList.stream().forEach((reisitem) -> {
+            System.out.println(reisitem.getReis().getLocatie());
 
         });
         System.out.println("There are " + rList.size() + " reizen in your shopping cart");
@@ -46,7 +56,6 @@ public class ShoppingCart {
             size = "";
         } else {
             size = Integer.toString(rList.size());
-
         }
 
         return size;
@@ -54,13 +63,12 @@ public class ShoppingCart {
 
     public String getpersonenperReis() {
 
-        String reizeCheckout = "";
-        uniqueLocationNames = new HashSet<>(locationNames);
-        for (String key : uniqueLocationNames) {
+          String reizeCheckout = "";
+//        uniqueLocationNames = new HashSet<>(locationNames);
+        for (ReisItem reisI : rList) {
 
-            reizeCheckout += "Voor " + Collections.frequency(locationNames, key) + " personen naar " + key.toString() + ", ";
-        }
-        System.out.println(uniqueLocationNames);
+            reizeCheckout += "Voor " + reisI.getAantal() + " personen naar " + reisI.getReis().getLocatie() + ", ";
+        }        
         return reizeCheckout;
 
     }
@@ -80,17 +88,26 @@ public class ShoppingCart {
     }
 
     public Float getTotal() {
-        if (rList == null || rList.isEmpty()) {
-            return 0f;
+        float totalBestelling = 0f;
+        for(ReisItem reisI: rList){
+            
+            totalBestelling += reisI.getTotal();
+        
         }
-        Float total = 0f;
-        total = rList.stream().map((reizen) -> (reizen.getPrijs())).reduce(total, (accumulator, _item) -> accumulator + _item);
-        return total;
+        return totalBestelling;
     }
-
-
 
     public void clearCart() {
         rList.clear();
     }
+
+    public List<ReisItem> getrList() {
+        return rList;
+    }
+
+    public void setrList(List<ReisItem> rList) {
+        this.rList = rList;
+    }
+    
+    
 }

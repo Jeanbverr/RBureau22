@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import cart.ReisItem;
 import entities.Bestelling;
 import entities.Klant;
 import entities.Reis;
@@ -20,7 +21,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import model.ShoppingCart;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -31,7 +36,10 @@ import javax.inject.Named;
 public class ShoppingCartController implements Serializable {
 
     @EJB
-    private model.ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart;
+    
+
+    
 
     
     @LoggerM
@@ -55,7 +63,15 @@ public class ShoppingCartController implements Serializable {
     public void ConfirmBestelling(Klant klant) {
 
     }
-
+    
+    public List<ReisItem> getReisItemList(){
+       
+        
+        
+       // RequestContext.getCurrentInstance().execute("document.getElementById('reizen_string').innerHTML = '';");
+        return shoppingCart.getrList();
+    }
+ 
     public void clearCart() {
     }
 

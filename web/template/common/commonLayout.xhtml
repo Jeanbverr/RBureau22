@@ -7,7 +7,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
-          
+
         <h:outputStylesheet name="common-style.css" library="css" />
         <!--        <h:outputStylesheet library="css" name="style.css"  />-->
     </h:head>
@@ -17,22 +17,22 @@
                         </p:layoutUnit>-->
             <p:layoutUnit position="north"  style="border:none" size="80">
                           <h:form id="header_menu_form"><!--                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />-->
-                   
-                <p:menubar styleClass="header_shadow" >
+
+                    <p:menubar styleClass="header_shadow" >
                         <p:menuitem value="Reisbureau&trade;" style="font-size: 20px; font-weight: bold"/>
                         <p:menuitem value="      "   />
 
-                        
-                        
+
+
                         <f:facet name="options">  
                             <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>
                             <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
-                             
+
                         </f:facet>
-                         
+
 
                     </p:menubar>
-                    
+
                 </h:form>
             </p:layoutUnit>
 
@@ -48,14 +48,30 @@
 
             <p:layoutUnit  position="west" size="200" header="Checkout" resizable="false" closable="false" collapsible="true">
                 <h:form id="checkout_form">
-                <div id="categorie" >
-                    <p>Welkom #{LoginController.name} !!!</p>
-                    <ui:insert name="Checkout">Reizen Komen Hier</ui:insert><br></br>
-                    
-                        <h:outputText id="personen_per_reis" value = "#{ShoppingCartController.getpersonenperReis()}"/>
-                     
-                </div>
-               </h:form>
+                    <div id="categorie" >
+                        <p>Welkom #{LoginController.name} !!!</p>
+                        <ui:insert name="Checkout">Reizen Komen Hier</ui:insert><br></br>
+
+                        <p:dataTable id="personen_per_reis" value="#{ShoppingCartController.getReisItemList()}" var="item">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="# pers"/>
+                                </f:facet>
+                                <h:outputText value="#{item.aantal}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Prijs"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reis.locatie}"/>
+                            </p:column> 
+
+
+                        </p:dataTable>
+
+                    </div>
+                </h:form>
             </p:layoutUnit>
 
             <!--    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
