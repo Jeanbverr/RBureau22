@@ -39,6 +39,7 @@ public class LoginController implements Serializable {
     private String email;
     private String pwd;
     private String name;
+    private boolean loggedIn;
 
     public LoginController() {
     }
@@ -62,8 +63,9 @@ public class LoginController implements Serializable {
         }else{
             if(klant.getEmail().equals(email) && klant.getPaswoord().equals(pwd)){
             
-              System.out.println("login succesfull");               
+              System.out.println("login succesful");               
               name= klant.getNaam();
+              loggedIn = true;
               return "default?faces-redirect=true";
               
             }else{
@@ -121,6 +123,14 @@ public class LoginController implements Serializable {
         return klant;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+ 
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+    
     public void setKlant(Klant klant) {
         this.klant = klant;        
     }   
