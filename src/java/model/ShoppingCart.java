@@ -7,9 +7,11 @@ package model;
 
 import cart.ReisItem;
 import entities.Bestelling;
+import entities.Klant;
 import entities.Reis;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.Stateful;
 
 /**
@@ -21,6 +23,9 @@ public class ShoppingCart {
 
     private List<ReisItem> rList = new ArrayList<ReisItem>();  
     private Bestelling bestelling = new Bestelling();
+    
+   
+    
 
     public void addItem(Reis item) {
 
@@ -87,7 +92,7 @@ public class ShoppingCart {
         }
     }
 
-    public Float getTotal() {
+    public Float getTotalBestelling() {
         float totalBestelling = 0f;
         for(ReisItem reisI: rList){
             
@@ -95,6 +100,27 @@ public class ShoppingCart {
         
         }
         return totalBestelling;
+    }
+    
+    public void addBestelling(Klant klant){
+        
+        Bestelling bestelling = new Bestelling();
+        bestelling.setKlantId(klant);
+        bestelling.setTotaal(this.getTotalBestelling());
+        
+        // create confirmation number
+        Random random = new Random();
+        int i = random.nextInt(999999999);
+        bestelling.setConfirmatienummer(i);
+        
+              
+        
+        
+    }
+    
+    public void addReizentoBestelling(){
+    
+    
     }
 
     public void clearCart() {

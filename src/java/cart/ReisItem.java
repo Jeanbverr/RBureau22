@@ -27,6 +27,10 @@ public class ReisItem {
     }
 
     public short getAantal() {
+        
+        if(aantal_personen < 0){
+            aantal_personen = 0;
+        }
         return aantal_personen;
     }
 
@@ -39,6 +43,7 @@ public class ReisItem {
     }
 
     public void decrementAantal() {
+        
         aantal_personen--;
     }
 

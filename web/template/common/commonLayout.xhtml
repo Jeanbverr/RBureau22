@@ -25,7 +25,7 @@
 
 
                         <f:facet name="options">  
-                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>
+                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart" outcome="/shoppingcart"/>
                             <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
 
                         </f:facet>
@@ -56,13 +56,13 @@
 
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="# pers"/>
+                                    <h:outputText value="Pers."/>
                                 </f:facet>
                                 <h:outputText value="#{item.aantal}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Prijs"/>
+                                    <h:outputText value="Locatie"/>
                                 </f:facet>
                                 <h:outputText value="#{item.reis.locatie}"/>
                             </p:column> 
