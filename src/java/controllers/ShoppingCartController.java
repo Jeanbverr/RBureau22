@@ -6,28 +6,19 @@
 package controllers;
 
 import cart.ReisItem;
-import entities.BesteldeReis;
 import entities.Bestelling;
 import entities.Klant;
 import entities.Reis;
 import interceptor.LoggerM;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import static java.util.Collections.list;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedProperty;
+import javax.inject.Inject;
 import javax.inject.Named;
 import model.ShoppingCart;
-import org.primefaces.context.RequestContext;
+
 
 /**
  *
@@ -39,14 +30,26 @@ public class ShoppingCartController implements Serializable {
 
     @EJB
     private ShoppingCart shoppingCart; 
+    
+    @Inject    
+    private LoginController loginController;
+    
+    Bestelling bestelling;
+
+    public Bestelling getBestelling() {
+        return bestelling;
+    }
+   
 
     @LoggerM
-    public void addItem(Reis item) {    
-        
-       
+    public void addItem(Reis item) {          
         
         shoppingCart.addItem(item);
-
+    }
+    
+    public void removeItem(ReisItem item){
+    
+        shoppingCart.removeReis(item);    
     }
     
     public float getTotalBestelling(){
@@ -63,33 +66,31 @@ public class ShoppingCartController implements Serializable {
     
       return shoppingCart.getpersonenperReis();
     
-    }
-
-    public void ConfirmBestelling(Klant klant) {
-        Bestelling bestelling = new Bestelling();
-        bestelling.setKlantId(klant);
-        bestelling.setTotaal(shoppingCart.getTotalBestelling());
-        
-        // create confirmation number
-        Random random = new Random();
-        int i = random.nextInt(999999999);
-        bestelling.setConfirmatienummer(i);
-        
-        BesteldeReis besteldeReis = new BesteldeReis();
-        
-        
-
-    }
+    }   
     
-    public List<ReisItem> getReisItemList(){
+    public List<ReisItem> getReisItemList(){      
        
-        
-        
        // RequestContext.getCurrentInstance().execute("document.getElementById('reizen_string').innerHTML = '';");
         return shoppingCart.getrList();
     }
+    
+     public String ConfirmBestelling() {
+         
+      
+      bestelling = shoppingCart.addBestelling(loginController.getKlant());  
+     
+      return "bestellingconfirmatie?faces-redirect=true";
+      
+    }
  
     public void clearCart() {
+        
+        shoppingCart.clearCart();
+    }   
+   
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 
 }

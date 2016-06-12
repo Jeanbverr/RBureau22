@@ -31,7 +31,6 @@ import model.KlantFacade;
  *
  */
 @Named(value = "LoginController")
-
 @SessionScoped
 public class LoginController implements Serializable {
 

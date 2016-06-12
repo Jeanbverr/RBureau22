@@ -6,13 +6,18 @@
 package model;
 
 import cart.ReisItem;
+import entities.BesteldeReis;
+import entities.BesteldeReisPK;
 import entities.Bestelling;
 import entities.Klant;
 import entities.Reis;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -21,11 +26,20 @@ import javax.ejb.Stateful;
 @Stateful
 public class ShoppingCart {
 
+    @EJB
+    private BesteldeReisFacade besteldeReisFacade;
+
+    @EJB
+    private BestellingFacade bestellingFacade;  
+    
+    @PersistenceContext(unitName = "KutprojectPU")
+    private EntityManager em;
+    
+    
+    
+    
     private List<ReisItem> rList = new ArrayList<ReisItem>();  
-    private Bestelling bestelling = new Bestelling();
-    
-   
-    
+       
 
     public void addItem(Reis item) {
 
@@ -33,8 +47,7 @@ public class ShoppingCart {
         for (ReisItem reisI : rList) {
 
             if (reisI.getReis().getLocatie().equals(item.getLocatie())) {
-                currentReisitem = reisI;
-            }
+                currentReisitem = reisI;            }
         }
 
         if (currentReisitem == null) {
@@ -42,9 +55,7 @@ public class ShoppingCart {
             rList.add(reisItem);
 
         } else {
-
             currentReisitem.incrementAantal();
-
         }
         rList.stream().forEach((reisitem) -> {
             System.out.println(reisitem.getReis().getLocatie());
@@ -62,7 +73,6 @@ public class ShoppingCart {
         } else {
             size = Integer.toString(rList.size());
         }
-
         return size;
     }
 
@@ -78,13 +88,13 @@ public class ShoppingCart {
 
     }
 
-    public void removeReis(Reis item) {
+    public void removeReis(ReisItem item) {
         if (rList.contains(item)) {
             rList.remove(item);
         }
     }
 
-    public Integer getNumberOfReizen() {
+    public int getNumberOfReizen() {
         if (rList.isEmpty() || rList == null) {
             return 0;
         } else {
@@ -92,7 +102,7 @@ public class ShoppingCart {
         }
     }
 
-    public Float getTotalBestelling() {
+    public float getTotalBestelling() {
         float totalBestelling = 0f;
         for(ReisItem reisI: rList){
             
@@ -102,7 +112,9 @@ public class ShoppingCart {
         return totalBestelling;
     }
     
-    public void addBestelling(Klant klant){
+    
+    
+    public Bestelling addBestelling(Klant klant){
         
         Bestelling bestelling = new Bestelling();
         bestelling.setKlantId(klant);
@@ -111,16 +123,45 @@ public class ShoppingCart {
         // create confirmation number
         Random random = new Random();
         int i = random.nextInt(999999999);
-        bestelling.setConfirmatienummer(i);
-        
-              
+        bestelling.setConfirmatienummer(i); 
         
         
+        bestellingFacade.create(bestelling);  
+       // System.out.println("The id van de bestelling is " + bestelling.getId());
+        //Voeg reizen in de shoppingcart toe aan de bestelling
+       addReizentoBestelling(bestelling);       
+        
+        // maak shopping cart leeg       
+       clearCart();
+       
+       return bestelling;
+    
     }
     
-    public void addReizentoBestelling(){
-    
-    
+    public void addReizentoBestelling(Bestelling bestelling){
+        
+            
+
+            //The ID is only guaranteed to be generated at flush time.
+            //Persisting an entity only makes it "attached" to the persistence context. So, either flush the entity manager explicitely
+            em.flush();
+            
+            System.out.println("The id van de bestelling is " + bestelling.getId());
+            for(ReisItem reisItem: rList){
+            
+                int reisId = reisItem.getReis().getId();
+                
+                //Koppel elke reis aan de bestelling vd klant door pk object
+                BesteldeReisPK besteldeReisPK = new BesteldeReisPK();
+                besteldeReisPK.setReisId(reisId);
+                besteldeReisPK.setBestellingId(bestelling.getId());
+                
+                //bestelde reis wordt aangemaakt met primary key object
+                BesteldeReis besteldereis = new BesteldeReis(besteldeReisPK);
+                besteldereis.setAantalPersonen(reisItem.getAantal());
+                besteldeReisFacade.create(besteldereis);               
+            
+            }    
     }
 
     public void clearCart() {
@@ -133,6 +174,10 @@ public class ShoppingCart {
 
     public void setrList(List<ReisItem> rList) {
         this.rList = rList;
+    }
+
+    public void persist(Object object) {
+        em.persist(object);
     }
     
     

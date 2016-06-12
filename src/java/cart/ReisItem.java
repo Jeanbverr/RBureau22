@@ -15,7 +15,7 @@ public class ReisItem {
     
     
     Reis reis;
-    short aantal_personen;
+    int aantal_personen;
 
     public ReisItem(Reis reis) {
         this.reis = reis;
@@ -26,7 +26,7 @@ public class ReisItem {
         return reis;
     }
 
-    public short getAantal() {
+    public int getAantal() {
         
         if(aantal_personen < 0){
             aantal_personen = 0;
@@ -34,7 +34,7 @@ public class ReisItem {
         return aantal_personen;
     }
 
-    public void setAantal(short aantal_personen) {
+    public void setAantal(int aantal_personen) {
         this.aantal_personen = aantal_personen;
     }
 
@@ -47,7 +47,7 @@ public class ReisItem {
         aantal_personen--;
     }
 
-    public double getTotal() {
+    public float getTotal() {
         float amount = 0;
         amount = (this.getAantal()) * reis.getPrijs();
         return amount;

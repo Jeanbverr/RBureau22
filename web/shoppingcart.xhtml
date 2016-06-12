@@ -20,13 +20,16 @@
                     <h:form id="bestelling_form">
                         <p:outputLabel id="bestelling_totaal" style="font-weight: bold" value="Totaal bestelling: #{ShoppingCartController.totalBestelling} eur    "/>
                         <p:button value="Verder shoppen" outcome="/default"/>
-                        <p:commandButton style="margin-left :100px;" value="Confirm bestelling">
-                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                        <p:commandButton style="margin-left :100px;" value="Confirm bestelling" action="#{ShoppingCartController.ConfirmBestelling()}" ajax="false">
+<!--                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />-->
                         </p:commandButton>
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:button value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" outcome="/default"/>
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
+<!--
+                        <p:confirmDialog showEffect="fade" hideEffect="fade" message="Are you sure?" widgetVar="confirmdialog">
+                            
+                                <p:commandButton value="Yes"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('confirmdialog').hide()"/>
+                                <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('confirmdialog').hide()"/>
+                           
+                        </p:confirmDialog>-->
                         <p:dataTable id="bestelling_table" style="margin-top: 15px;" value="#{ShoppingCartController.getReisItemList()}" var="item">
                             <p:column>
                                 <p:graphicImage value="${initParam.categoriesImagePath}${item.reis.locatie}.jpg" alt="${item.reis.locatie}" width="170px"/>
@@ -68,6 +71,9 @@
                                 <h:outputText value="#{item.total}"/><br></br>
                                 <h:outputText style="font-size:12px;" value="(#{item.reis.prijs} eur per persoon)"/>
 
+                            </p:column> 
+                            <p:column>
+                                <p:commandButton  value="Verwijder" action="#{ShoppingCartController.removeItem(item)}" ajax="true" update=":bestelling_form:bestelling_table :checkout_form:personen_per_reis :bestelling_form:bestelling_totaal :header_menu_form:number_of_items"/>
                             </p:column> 
                         </p:dataTable>
                     </h:form>
