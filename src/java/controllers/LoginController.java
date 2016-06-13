@@ -54,7 +54,7 @@ public class LoginController implements Serializable {
     }
 
     @LoggerM
-    public String loginValidation(HttpSession session) {
+    public String loginValidation() {
         klant = klantFacade.findByEmail(email);
         if (klant == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User does not exist, please register first", ""));
@@ -69,7 +69,7 @@ public class LoginController implements Serializable {
             // session.invalidate();
             //  final HttpSession session = request.getSession()
             request.setAttribute("authenticated", fc);
-            session = request.getSession(true);      
+            request.getSession(true);      
             name = klant.getNaam();
             loggedIn = true;
             return "default?faces-redirect=true";
@@ -80,7 +80,9 @@ public class LoginController implements Serializable {
         }
     }
 
-        public String logout(HttpSession session) {
+        public String logout() {
+       
+         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
          session.invalidate();
          return "login?faces-redirect=true";
     }
