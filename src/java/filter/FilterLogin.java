@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
  
  
 /**
@@ -22,30 +23,29 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FilterLogin implements Filter {
  
-    /**
-     * Checks if user is logged in. If not it redirects to the login.xhtml page.
-     */
+  @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // Get the loginBean from session attribute
-        LoginController loginBean = (LoginController)((HttpServletRequest)request).getSession().getAttribute("loginBean");
-         
-        // For the first application request there is no loginBean in the session so user needs to log in
-        // For other requests loginBean is present but we need to check if user has logged in successfully
-        if (loginBean == null || !loginBean.isLoggedIn()) {
-            String contextPath = ((HttpServletRequest)request).getContextPath();
-            ((HttpServletResponse)response).sendRedirect(contextPath + "/login.xhtml");
+
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession();
+
+        if (session.getAttribute("authenticated") != null || req.getRequestURI().endsWith("login.xhtml")) {
+            chain.doFilter(request, response);
+            System.out.println("authenticated");
+        } else {
+            HttpServletResponse res = (HttpServletResponse) response;
+            res.sendRedirect(req.getContextPath() + "/login.xhtml");
+           
         }
-         
-        chain.doFilter(request, response);
-             
+
     }
- 
-    public void init(FilterConfig config) throws ServletException {
-        // Nothing to do here!
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
     }
- 
+
+    @Override
     public void destroy() {
-        // Nothing to do here!
-    }   
-     
+    }
 }

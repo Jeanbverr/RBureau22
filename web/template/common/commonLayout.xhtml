@@ -19,7 +19,7 @@
 
                     <p:menubar styleClass="header_shadow" style ="overflow: hidden !important; background: #f6f6f6 !important;">
                         <p:menuitem value="Reisbureau&trade;" style="font-size: 20px; font-weight: bold"/>
-                        <p:menuitem style="font-size: 10px; margin-top: 8px;" value = "#{SessionManagerBean.totalActiveSessions} active user(s) on this website."/>
+                        <p:menuitem style="font-size: 10px; margin-top: 8px;" value = "#{SessionManagerBean.totalActiveSessions} active user(s) on this website and #{Counter.hitCount} hits in total"/>
                       
                         <f:facet name="options">  
                             <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>

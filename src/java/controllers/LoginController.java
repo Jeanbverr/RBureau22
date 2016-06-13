@@ -62,13 +62,14 @@ public class LoginController implements Serializable {
             return "login";
         } else if (klant.getEmail().equals(email) && klant.getPaswoord().equals(pwd)) {
 
-          //  System.out.println("login succesful");
+            System.out.println("login succesful");
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
             //HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
             //HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             // session.invalidate();
             //  final HttpSession session = request.getSession()
+            request.setAttribute("authenticated", fc);
             session = request.getSession(true);      
             name = klant.getNaam();
             loggedIn = true;
@@ -81,8 +82,6 @@ public class LoginController implements Serializable {
     }
 
         public String logout(HttpSession session) {
-
-      //  Httpsession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
          session.invalidate();
          return "login?faces-redirect=true";
     }
