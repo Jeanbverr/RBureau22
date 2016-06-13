@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import entities.*;
 import interceptor.LoggerM;
 import java.io.IOException;
@@ -31,7 +32,6 @@ import model.KlantFacade;
  *
  */
 @Named(value = "LoginController")
-
 @SessionScoped
 public class LoginController implements Serializable {
 
@@ -55,9 +55,7 @@ public class LoginController implements Serializable {
 
     @LoggerM
     public String loginValidation() {
-
         klant = klantFacade.findByEmail(email);
-
         if (klant == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User does not exist, please register first", ""));
             return "login";
@@ -66,8 +64,12 @@ public class LoginController implements Serializable {
             System.out.println("login succesful");
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
-            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
-            request.getSession(true);
+            //HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+            //HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            // session.invalidate();
+            //  final HttpSession session = request.getSession()
+            request.setAttribute("authenticated", fc);
+            HttpSession session = request.getSession(true);      
             name = klant.getNaam();
             loggedIn = true;
             return "default?faces-redirect=true";
@@ -78,11 +80,10 @@ public class LoginController implements Serializable {
         }
     }
 
-    public String logout() {
-
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        session.invalidate();
-        return "login?faces-redirect=true";
+        public String logout() {       
+         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+         session.invalidate();
+         return "login?faces-redirect=true";
     }
 
     //Voor registratie 

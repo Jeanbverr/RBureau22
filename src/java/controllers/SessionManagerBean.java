@@ -8,6 +8,7 @@ package controllers;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.inject.Named;
+import javax.servlet.annotation.WebListener;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -18,21 +19,21 @@ import javax.servlet.http.HttpSessionListener;
 @Named(value = "SessionManagerBean")
 @Singleton
 @LocalBean
+@WebListener
 public class SessionManagerBean implements HttpSessionListener {
 
   private static int totalActiveSessions;
 
 
   @Override
-  public void sessionCreated(HttpSessionEvent arg0) {
-         System.out.println("Before creation: " + totalActiveSessions);
+  public void sessionCreated(HttpSessionEvent arg0) {       
 	totalActiveSessions++;
 	System.out.println("sessionCreated - add one session into counter: " + totalActiveSessions);
   }
 
   @Override
   public void sessionDestroyed(HttpSessionEvent arg0) {
-         totalActiveSessions = totalActiveSessions-2;
+         totalActiveSessions--;
 	System.out.println("sessionDestroyed - deduct one session from counter");
   }
 
@@ -43,7 +44,5 @@ public class SessionManagerBean implements HttpSessionListener {
     public void setTotalActiveSessions(int totalActiveSessions) {
         SessionManagerBean.totalActiveSessions = totalActiveSessions;
     }
-  
-  
     
 }

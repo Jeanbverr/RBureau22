@@ -18,10 +18,9 @@
                     <p:tab title="Sneeuwvakanties">
                         <f:view>
                             <h:form>
-                                <h1><h:outputText value="List"/>   #{SessionManagerBean.totalActiveSessions}  </h1>
-                               
-                                <h:commandLink value = "add to cart" action="#{ShoppingCartController.addItem(item)}"></h:commandLink>
-                                <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item" >
+                                <h:commandLink value = "" action="#{ShoppingCartController.addItem(item)}"></h:commandLink>
+                                <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item">
+                         
                                     <p:column>
                                         <f:facet name="img">
                                             <h:outputText value="img"/>
@@ -31,37 +30,37 @@
                                     
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Locatie"/>
+                                            <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Land"/>
+                                            <h:outputText value="Land" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.land}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Prijs"/>
+                                            <h:outputText value="Prijs" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.prijs}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Beschrijving"/>
+                                            <h:outputText value="Beschrijving" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.beschrijving}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Vertrekdatum"/>
+                                            <h:outputText value="Vertrekdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.vertrekdatum}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Terugdatum"/>
+                                            <h:outputText value="Terugdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
@@ -79,7 +78,7 @@
                     <p:tab title="Strandvakanties">
                         <f:view>
                             <h:form>
-                                <h1><h:outputText value="List"/></h1>
+                               
                                 <p:dataTable value="#{reisController.getReizenByCategorie('strand')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -90,37 +89,37 @@
 
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Locatie"/>
+                                            <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Land"/>
+                                            <h:outputText value="Land" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.land}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Prijs"/>
+                                            <h:outputText value="Prijs" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.prijs}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Beschrijving"/>
+                                            <h:outputText value="Beschrijving" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.beschrijving}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Vertrekdatum"/>
+                                            <h:outputText value="Vertrekdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.vertrekdatum}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Terugdatum"/>
+                                            <h:outputText value="Terugdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
@@ -135,7 +134,7 @@
                     <p:tab title="Backpacktrips">
                         <f:view>
                             <h:form>
-                                <h1><h:outputText value="List"/></h1>
+                              
                                 <p:dataTable value="#{reisController.getReizenByCategorie('backpacktrip')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -146,38 +145,38 @@
 
                                     <p:column> 
                                         <f:facet name="header">
-                                            <h:outputText value="Locatie"/>
+                                            <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
                                         
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Land"/>
+                                            <h:outputText value="Land" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.land}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Prijs"/>
+                                            <h:outputText value="Prijs" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.prijs}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Beschrijving"/>
+                                            <h:outputText value="Beschrijving" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.beschrijving}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Vertrekdatum"/>
+                                            <h:outputText value="Vertrekdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.vertrekdatum}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Terugdatum"/>
+                                            <h:outputText value="Terugdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>
@@ -192,7 +191,7 @@
                     <p:tab title="Citytrips">
                         <f:view>
                             <h:form>
-                                <h1><h:outputText value="List"/></h1>
+                               
                                 <p:dataTable value="#{reisController.getReizenByCategorie('citytrip')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -203,37 +202,37 @@
 
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Locatie"/>
+                                            <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Land"/>
+                                            <h:outputText value="Land" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.land}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Prijs"/>
+                                            <h:outputText value="Prijs" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.prijs}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Beschrijving"/>
+                                            <h:outputText value="Beschrijving" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.beschrijving}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Vertrekdatum"/>
+                                            <h:outputText value="Vertrekdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.vertrekdatum}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Terugdatum"/>
+                                            <h:outputText value="Terugdatum" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.terugdatum}"/>
                                     </p:column>

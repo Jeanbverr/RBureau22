@@ -9,8 +9,8 @@ and open the template in the editor.
 */
 
 #page{
-	width: 1000px;
-	margin: 0 auto;
+    width: 1000px;
+    margin: 0 auto;
 }
 
 #outputtext{
@@ -19,27 +19,56 @@ and open the template in the editor.
 }
 
 #header{
-	
-        text-align: center;
-        font-size: 200%;
+
+    text-align: center;
+    font-size: 200%;
 }
 
 #content{
-	
+
 }
+.ui-layout-center {                    
+    background: lightgrey !important;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+    background: rgba(206, 228, 253, 0.5) !important;
+}     
+.ui-layout-west .ui-layout-unit-content {
+    background: #fafafa !important;
+}  
+.ui-layout-north .ui-layout-unit-content {
+    background: #f1f1f1 !important;
+}  
+
+.ui-datatable-odd {
+    background: #ffffff;
+}
+
+.ui-datatable-even {
+    background: #F2F5F9;
+}
+.ui-layout-unit {
+    border: 0   ;
+}
+
+.noScrolllayoutUnit .ui-layout-unit-content{
+    overflow: hidden;
+}
+
 #categorie{
     margin-bottom: 50px;
     margin-top: 10px;
 }
 
 #footer{
-         text-align: center;
-         margin-bottom: 0px;
+    text-align: center;
+    margin-bottom: 0px;
 }
 
 .header_shadow{
-    
+
     -webkit-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
--moz-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
+    box-shadow: 0px 2px 5px 0px rgba(168,165,168,0.5);
 }

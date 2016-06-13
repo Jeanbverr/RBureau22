@@ -19,13 +19,12 @@
         <param-value>/img/categories/</param-value>
     </context-param>
     <filter>
-        <filter-name>Filter</filter-name>
-        <filter-class>servlet.SessionServlet</filter-class>
+        <filter-name>FilterLogin</filter-name>
+        <filter-class>filter.FilterLogin</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>Filter</filter-name>
-        <servlet-name>SessionServlet</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
+        <filter-name>FilterLogin</filter-name>      
+        <url-pattern>/faces/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -36,6 +35,9 @@
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>servlet.SessionServlet</servlet-class>       
     </servlet>
+    <session-config>
+		<session-timeout>1</session-timeout>
+    </session-config>
     <servlet-mapping>
          <servlet-name>SessionServlet</servlet-name>
          <url-pattern>/SessionServlet</url-pattern>
