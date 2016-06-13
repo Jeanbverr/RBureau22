@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import model.ReisFacade;
 import model.ReiscategorieFacade;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -26,8 +27,7 @@ import model.ReiscategorieFacade;
 @RequestScoped
 public class ReisController implements Serializable {
 
-    @EJB
-    private ReisFacade reisFacade;
+    
     @EJB
     private ReiscategorieFacade reiscategorieFacade;
     public ReisController() {

@@ -52,8 +52,7 @@ public class Bestelling implements Serializable {
     @NotNull
     @Column(name = "totaal")
     private float totaal;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = false)    
     @Column(name = "datumcreatie")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datumcreatie;

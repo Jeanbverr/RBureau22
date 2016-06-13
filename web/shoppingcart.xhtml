@@ -2,15 +2,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="template/common/commonLayout.xhtml">
-            
+
             <ui:define name ="reizen">
+
+                <h1>Uw bestelling </h1>
+
+                <f:view>
+                    <h:form id="bestelling_form">
+                        <p:outputLabel id="bestelling_totaal" style="font-weight: bold" value="Totaal bestelling: #{ShoppingCartController.totalBestelling} eur    "/>
+                        <p:button value="Verder shoppen" outcome="/default"/>
+                        <p:commandButton style="margin-left :100px;" value="Confirm bestelling" action="#{ShoppingCartController.ConfirmBestelling()}" ajax="false">
+<!--                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />-->
+                        </p:commandButton>
+<!--
+                        <p:confirmDialog showEffect="fade" hideEffect="fade" message="Are you sure?" widgetVar="confirmdialog">
+                            
+                                <p:commandButton value="Yes"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('confirmdialog').hide()"/>
+                                <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('confirmdialog').hide()"/>
+                           
+                        </p:confirmDialog>-->
+                        <p:dataTable id="bestelling_table" style="margin-top: 15px;" value="#{ShoppingCartController.getReisItemList()}" var="item">
+                            <p:column>
+                                <p:graphicImage value="${initParam.categoriesImagePath}${item.reis.locatie}.jpg" alt="${item.reis.locatie}" width="170px"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Locatie"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reis.locatie}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="vertrekdatum"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reis.vertrekdatum}"/>
+                            </p:column> 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="terugdatum"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reis.terugdatum}"/>
+                            </p:column> 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Aantal personen"/>
+                                </f:facet>
+                                <h:outputText value="#{item.aantal}"/>
+
+                                <p:commandButton style="margin-left: 100px;" value="+" action="#{item.incrementAantal()}" ajax="true" update=":bestelling_form:bestelling_table :checkout_form:personen_per_reis :bestelling_form:bestelling_totaal"/>
+                                <p:commandButton  value="-" action="#{item.decrementAantal()}" ajax="true" update=":bestelling_form:bestelling_table :checkout_form:personen_per_reis :bestelling_form:bestelling_totaal"/>
+
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Subtotaal"/>
+                                </f:facet>
+
+                                <h:outputText value="#{item.total}"/><br></br>
+                                <h:outputText style="font-size:12px;" value="(#{item.reis.prijs} eur per persoon)"/>
+
+                            </p:column> 
+                            <p:column>
+                                <p:commandButton  value="Verwijder" action="#{ShoppingCartController.removeItem(item)}" ajax="true" update=":bestelling_form:bestelling_table :checkout_form:personen_per_reis :bestelling_form:bestelling_totaal :header_menu_form:number_of_items"/>
+                            </p:column> 
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+
             </ui:define>
+
+
+
         </ui:composition>
     </h:body>
 </html>
