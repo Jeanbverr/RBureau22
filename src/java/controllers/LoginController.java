@@ -69,7 +69,7 @@ public class LoginController implements Serializable {
             // session.invalidate();
             //  final HttpSession session = request.getSession()
             request.setAttribute("authenticated", fc);
-            request.getSession(true);      
+            HttpSession session = request.getSession(true);      
             name = klant.getNaam();
             loggedIn = true;
             return "default?faces-redirect=true";
@@ -80,8 +80,7 @@ public class LoginController implements Serializable {
         }
     }
 
-        public String logout() {
-       
+        public String logout() {       
          HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
          session.invalidate();
          return "login?faces-redirect=true";
