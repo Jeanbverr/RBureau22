@@ -167,55 +167,7 @@ public class ShoppingCart {
     
     
     
-    public Bestelling addBestelling(Klant klant){
-        
-        Bestelling bestelling = new Bestelling();
-        bestelling.setKlantId(klant);
-        bestelling.setTotaal(this.getTotalBestelling());
-        
-        // create confirmation number
-        Random random = new Random();
-        int i = random.nextInt(999999999);
-        bestelling.setConfirmatienummer(i); 
-        
-        
-        bestellingFacade.create(bestelling);  
-       // System.out.println("The id van de bestelling is " + bestelling.getId());
-        //Voeg reizen in de shoppingcart toe aan de bestelling
-       addReizentoBestelling(bestelling);       
-        
-        // maak shopping cart leeg       
-       clearCart();
-       
-       return bestelling;
     
-    }
-    
-    public void addReizentoBestelling(Bestelling bestelling){
-        
-            
-
-            //The ID is only guaranteed to be generated at flush time.
-            //Persisting an entity only makes it "attached" to the persistence context. So, either flush the entity manager explicitely
-            em.flush();
-            
-            System.out.println("The id van de bestelling is " + bestelling.getId());
-            for(ReisItem reisItem: rList){
-            
-                int reisId = reisItem.getReis().getId();
-                
-                //Koppel elke reis aan de bestelling vd klant door pk object
-                BesteldeReisPK besteldeReisPK = new BesteldeReisPK();
-                besteldeReisPK.setReisId(reisId);
-                besteldeReisPK.setBestellingId(bestelling.getId());
-                
-                //bestelde reis wordt aangemaakt met primary key object
-                BesteldeReis besteldereis = new BesteldeReis(besteldeReisPK);
-                besteldereis.setAantalPersonen(reisItem.getAantal());
-                besteldeReisFacade.create(besteldereis);               
-            
-            }    
-    }
     
     @Remove
     public void clearCart() {
