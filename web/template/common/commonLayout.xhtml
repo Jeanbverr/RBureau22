@@ -9,7 +9,15 @@
         <title>Facelet Title</title>
 
         <h:outputStylesheet name="common-style.css" library="css" />
+        <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="js/06.js"></script>
+        <h:outputScript library="js" name="bigWeatherJS.js"/>
         <!--        <h:outputStylesheet library="css" name="style.css"  />-->
+        
+        <h:head>
+       
+    </h:head>
+        
     </h:head>
     
     <h:body>       
@@ -22,7 +30,7 @@
                         <p:menuitem style="font-size: 10px; margin-top: 8px;" value = "#{SessionManagerBean.totalActiveSessions} active user(s) on this website and #{Counter.hitCount} hits in total"/>
                       
                         <f:facet name="options">  
-                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>
+                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart" outcome="/shoppingcart"/>
                             <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
                            
                         </f:facet>
@@ -34,7 +42,6 @@
 
                 <ui:insert name="reizen">Standard Text</ui:insert>
             </p:layoutUnit>
-
 
             <div id = "footer">
                 <p:layoutUnit position="south" header="Team Homo&trade;">  

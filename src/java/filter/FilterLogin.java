@@ -31,7 +31,7 @@ public class FilterLogin implements Filter {
 
         if (session.getAttribute("authenticated") != null || req.getRequestURI().endsWith("login.xhtml")) {
             chain.doFilter(request, response);
-            System.out.println("authenticated");
+            //System.out.println("authenticated");
         } else {
             HttpServletResponse res = (HttpServletResponse) response;
             res.sendRedirect(req.getContextPath() + "/login.xhtml");

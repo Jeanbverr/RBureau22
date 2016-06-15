@@ -6,10 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
-
+        <h:outputScript library="js" name="bigWeatherJS.js"/>
         <ui:composition template="template/common/commonLayout.xhtml">
 
             <ui:define name ="reizen">
@@ -19,20 +18,29 @@
                         <f:view>
                             <h:form>
                                 <h:commandLink value = "" action="#{ShoppingCartController.addItem(item)}"></h:commandLink>
-                                <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item">
-                         
+                                <p:dataTable value="#{reisController.getReizenByCategorie('sneeuw')}" var="item">                         
                                     <p:column>
                                         <f:facet name="img">
                                             <h:outputText value="img"/>
                                         </f:facet>
                                         <p:graphicImage value="${initParam.categoriesImagePath}${item.locatie}.jpg" alt="${item.locatie}" width="170px"/> 
-                                    </p:column>
-                                    
+                                    </p:column>                                    
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
+                                    </p:column>
+                                    <p:column id = "test">
+                                        <f:facet name="header">
+                                            <h:outputText value="Weer" style='font-weight: bold;'/>
+                                        </f:facet>
+                                        <h:form>
+                                             <div value ="#{item.locatie}" class="myDiv">
+                                            <img src ="" class ="image"></img>
+                                            <p></p>
+                                        </div>
+                                        </h:form>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
@@ -66,7 +74,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:commandButton action="#{ShoppingCartController.addItem(item)}" ajax="true" value="add to cart" update=":header_menu_form:number_of_items :checkout_form:personen_per_reis">
-                                           
+
                                         </p:commandButton>
                                     </p:column>
 
@@ -78,7 +86,7 @@
                     <p:tab title="Strandvakanties">
                         <f:view>
                             <h:form>
-                               
+
                                 <p:dataTable value="#{reisController.getReizenByCategorie('strand')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -93,7 +101,17 @@
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
                                     </p:column>
+
                                     <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Weer" style='font-weight: bold;'/>
+                                        </f:facet>
+                                       <div value ="#{item.locatie}" class="myDiv">
+                                            <img src ="" class ="image"></img>
+                                            <p></p>
+                                        </div>
+                                    </p:column>
+                                    <p:column>                                       
                                         <f:facet name="header">
                                             <h:outputText value="Land" style='font-weight: bold;'/>
                                         </f:facet>
@@ -134,7 +152,7 @@
                     <p:tab title="Backpacktrips">
                         <f:view>
                             <h:form>
-                              
+
                                 <p:dataTable value="#{reisController.getReizenByCategorie('backpacktrip')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -148,7 +166,16 @@
                                             <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
-                                        
+
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Weer" style='font-weight: bold;'/>
+                                        </f:facet>
+                                       <div value ="#{item.locatie}" class="myDiv">
+                                            <img src ="" class ="image"></img>
+                                            <p></p>
+                                        </div>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
@@ -191,7 +218,7 @@
                     <p:tab title="Citytrips">
                         <f:view>
                             <h:form>
-                               
+
                                 <p:dataTable value="#{reisController.getReizenByCategorie('citytrip')}" var="item">
                                     <p:column>
                                         <f:facet name="img">
@@ -205,6 +232,17 @@
                                             <h:outputText value="Locatie" style='font-weight: bold;'/>
                                         </f:facet>
                                         <h:outputText value="#{item.locatie}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Weer" style='font-weight: bold;'/>
+                                        </f:facet>
+                                   
+                                        <div value ="#{item.locatie}" class="myDiv">
+                                            <img src ="" class ="image"></img>
+                                            <p></p>
+                                        </div>
+                                      
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
