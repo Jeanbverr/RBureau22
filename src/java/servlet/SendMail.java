@@ -11,50 +11,48 @@ package servlet;
  */
 import java.io.*;
 import java.util.*;
+import javax.ejb.Asynchronous;
+import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+
 public class SendMail {
-
-    public static void send(String to, String sub,
-            String msg, final String user, final String pass) {
-        //create an instance of Properties Class   
-        Properties props = new Properties();
-
-        /* Specifies the IP address of your default mail server
-     	   for e.g if you are using gmail server as an email sever
-           you will pass smtp.gmail.com as value of mail.smtp host. 
-           As shown here in the code. 
-           Change accordingly, if your email id is not a gmail id
-         */
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        //below mentioned mail.smtp.port is optional
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-
-        /* Pass Properties object(props) and Authenticator object   
-           for authentication to Session instance 
-         */
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, pass);
+    
+   @Asynchronous
+   public static void sendEmail(String host, String port,
+            final String userName, final String password, String toAddress,
+            String subject, String message) throws AddressException,
+            MessagingException {
+ 
+        // sets SMTP server properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+ 
+        // creates a new session with an authenticator
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
             }
-        });
-
-        try {
-
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject(sub);
-            message.setText(msg);
-
-            /* Transport class is used to deliver the message to the recipients */
-            Transport.send(message);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        };
+ 
+        Session session = Session.getInstance(properties, auth);
+ 
+        // creates a new e-mail message
+        Message msg = new MimeMessage(session);
+ 
+        msg.setFrom(new InternetAddress(userName));
+        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setSubject(subject);
+        msg.setSentDate(new Date());
+        msg.setText(message);
+ 
+        // sends the e-mail
+        Transport.send(msg);
+ 
     }
 }
