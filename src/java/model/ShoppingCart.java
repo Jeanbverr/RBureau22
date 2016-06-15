@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -163,7 +164,8 @@ public class ShoppingCart {
             
             }    
     }
-
+    
+    @Remove
     public void clearCart() {
         rList.clear();
     }

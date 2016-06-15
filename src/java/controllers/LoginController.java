@@ -85,6 +85,8 @@ public class LoginController implements Serializable {
          session.invalidate();
          return "login?faces-redirect=true";
     }
+        
+    
 
     //Voor registratie 
     public String add() {

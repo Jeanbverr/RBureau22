@@ -18,11 +18,11 @@
                           <h:form id="header_menu_form"><!--                <h:outputText id ="outputtext" value="Hey #{LoginController.name}!!!Welkom op Reisbureau. Neem snel een kijkje!" />-->
 
                     <p:menubar styleClass="header_shadow" style ="overflow: hidden !important; background: #f6f6f6 !important;">
-                        <p:menuitem value="Reisbureau&trade;" style="font-size: 20px; font-weight: bold"/>
+                        <p:menuitem value="Reisbureau&trade;" style="font-size: 20px; font-weight: bold" outcome="/default"/>
                         <p:menuitem style="font-size: 10px; margin-top: 8px;" value = "#{SessionManagerBean.totalActiveSessions} active user(s) on this website and #{Counter.hitCount} hits in total"/>
                       
                         <f:facet name="options">  
-                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart"/>
+                            <p:button id="number_of_items" value="Shopping-cart #{ShoppingCartController.reisListsize}" icon="ui-icon-cart" outcome="/shoppingcart"/>
                             <p:commandButton action="#{LoginController.logout()}" ajax="false" value="Logout" icon="ui-icon-extlink" />
                            
                         </f:facet>
@@ -58,7 +58,7 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Prijs" style='font-weight: bold; font-size: 15px;'/>
+                                    <h:outputText value="Locatie" style='font-weight: bold; font-size: 15px;'/>
                                 </f:facet>
                                 <h:outputText value="#{item.reis.locatie}"/>
                             </p:column>

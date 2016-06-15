@@ -10,13 +10,20 @@ import entities.Bestelling;
 import entities.Klant;
 import entities.Reis;
 import interceptor.LoggerM;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.ShoppingCart;
 
 
@@ -74,12 +81,14 @@ public class ShoppingCartController implements Serializable {
         return shoppingCart.getrList();
     }
     
-     public String ConfirmBestelling() {
+     public void ConfirmBestelling() throws ServletException, IOException {
          
       
       bestelling = shoppingCart.addBestelling(loginController.getKlant());  
-     
-      return "bestellingconfirmatie?faces-redirect=true";
+      String message = "Uw bestelling met een totaal van " + bestelling.getTotaal() + " eur werd succesvol verwerkt.\n";
+      message += "Uw confirmatie nummer is " + bestelling.getConfirmatienummer();
+      runServlet(message);
+      //return "bestellingconfirmatie?faces-redirect=true";
       
     }
  
@@ -87,6 +96,22 @@ public class ShoppingCartController implements Serializable {
         
         shoppingCart.clearCart();
     }   
+    
+    public void runServlet(String message) throws ServletException, IOException {
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+        System.out.println("adres van de receiver = " + loginController.getKlant().getEmail());
+        
+        request.setAttribute("receiver",loginController.getKlant().getEmail());
+        request.setAttribute("subject", "Bestelling bij Reisbureau ");
+        request.setAttribute("content", message);
+        
+        ServletContext sc = (ServletContext) fc.getExternalContext().getContext();
+        RequestDispatcher dispatcher = sc.getRequestDispatcher("/MailServlet");
+        dispatcher.forward(request,response);
+    }
    
 
     public void setLoginController(LoginController loginController) {

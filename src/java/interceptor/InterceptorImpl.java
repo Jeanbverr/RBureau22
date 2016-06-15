@@ -22,7 +22,7 @@ import javax.interceptor.InvocationContext;
 public class InterceptorImpl implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(InterceptorImpl.class.getName());
-
+    
      
 
 //    @AroundConstruct
