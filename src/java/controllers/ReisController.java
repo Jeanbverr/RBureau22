@@ -33,8 +33,7 @@ public class ReisController implements Serializable {
     public ReisController() {
     }
     //Elke categorie bevat een lijst van bijhorende reizen (in de entity)
-        public List<Reis> getReizenByCategorie(String categorie){
-        
+        public List<Reis> getReizenByCategorie(String categorie){       
         
         System.out.println("de categorie is " + categorie);
         return reiscategorieFacade.getReizenByCategory(categorie);

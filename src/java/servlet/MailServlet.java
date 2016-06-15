@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.Asynchronous;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -31,8 +32,8 @@ public class MailServlet extends HttpServlet {
     public void init() {        
         host = "smtp.gmail.com";
         port = "587";
-        user = "michael.feyaerts@gmail.com";
-        pass = "michael1301";
+        user = "ubiquitous10000@gmail.com";
+        pass = "ubiquitous123";
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,8 +49,8 @@ public class MailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // reads form fields
-        String recipient = (String) request.getAttribute("recipient");
+        // reads klant info from shoppingcontroller
+        String recipient = (String) request.getAttribute("receiver");
         String subject = (String) request.getAttribute("subject");
         String content = (String) request.getAttribute("content");
         
@@ -58,9 +59,9 @@ public class MailServlet extends HttpServlet {
  
         try {
             
-            //SendMail.sendEmail(host, port, user, pass, recipient, subject,
-             //       content);
-            resultMessage = "The e-mail was sent successfully";
+            SendMail.sendEmail(host, port, user, pass, recipient, subject,
+                    content);
+            resultMessage = "The e-mail was successfully sent";
         } catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "There was an error: " + ex.getMessage();
@@ -70,7 +71,7 @@ public class MailServlet extends HttpServlet {
 //                    .forward(request, response);
 //            RequestDispatcher rd = request.getRequestDispatcher("/login.xhtml");
 //            rd.forward(request, response);
-            response.sendRedirect("login.xhtml");
+            response.sendRedirect("bestellingconfirmatie.xhtml");
         }
     }
 
